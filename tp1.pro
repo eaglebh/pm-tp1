@@ -4,6 +4,7 @@ folder_01.target = qml
 DEPLOYMENTFOLDERS = folder_01
 
 QMAKE_CXXFLAGS += -std=c++11
+QT += widgets
 
 # Additional import path used to resolve QML modules in Creator's code model
 QML_IMPORT_PATH =
@@ -26,7 +27,8 @@ SOURCES += main.cpp \
     bibfile.cpp \
     authorreader.cpp \
     pagesreader.cpp \
-    bibfileio.cpp
+    bibfileio.cpp \
+    mainwindow.cpp
 
 # Installation path
 # target.path =
@@ -47,4 +49,8 @@ HEADERS += \
     bibfile.h \
     authorreader.h \
     pagesreader.h \
-    bibfileio.h
+    bibfileio.h \
+    mainwindow.h
+
+FORMS += \
+    mainwindow.ui

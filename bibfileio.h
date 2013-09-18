@@ -8,6 +8,7 @@ class BibfileIO
 private:
     BibFile* bibFile;
     BibtexFormat* readBibtex(stringstream &bibStr);
+    static BibtexFormat *parseTypeAndReference(const string bibStr);
 public:
     BibfileIO(const string fileName);
     BibFile* getBibFile();

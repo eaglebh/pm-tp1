@@ -5,6 +5,12 @@
 #include "authorreader.h"
 #include "pagesreader.h"
 
+
+list<BibtexFormat *> BibFile::getBibs() const
+{
+    return bibs;
+}
+
 BibFile::BibFile()
 {
 }
@@ -18,6 +24,7 @@ BibtexFormat *BibFile::retrieveBibtex(BibFile::SearchCriteria criteria, const st
 {
     BibtexFormat* bib = NULL;
     string actualText = "";
+    stringstream ss;
     for (list<BibtexFormat*>::iterator it = bibs.begin(); it != bibs.end(); it++) {
         bib = *it;
         switch (criteria) {
@@ -25,20 +32,31 @@ BibtexFormat *BibFile::retrieveBibtex(BibFile::SearchCriteria criteria, const st
             actualText = bib->getAuthors().getAuthorsText();
             break;
         case YEAR:
-            //       actualText = to_string(bib->getYear());
+            ss.str("");
+            ss << bib->getYear();
+            actualText = ss.str();
             break;
         case VEHICLE:
-            //     actualText = bib->get;
+            if(bib->getType().compare(BibtexArticle::TYPE)) {
+                 actualText = ((BibtexArticle*)bib)->getJournal();
+            } else {
+                if(bib->getType().compare(BibtexInproceedings::TYPE)) {
+                     actualText = ((BibtexInproceedings*)bib)->getBooktitle();
+                }
+            }
             break;
         case TITLE:
             actualText = bib->getTitle();
             break;
+        case REFERENCE:
+            actualText = bib->getReference();
+            break;
         default:
             break;
         }
-    }
-    if(actualText.find(key) != string::npos){
-        return bib;
+        if(actualText.find(key) != string::npos){
+            return bib;
+        }
     }
     throw "Bibtex nao encontrado";
 }
@@ -76,35 +94,4 @@ string BibFile::toText() const
     return ss.str();
 }
 
-BibtexFormat* BibFile::parseTypeAndReference(const string bibStr)
-{
-    char type[80], ref[80];
-    sscanf(bibStr.c_str(), "%[^{]{%[^,],", type, ref);
-    BibtexFormat* bib;
 
-    if(BibtexArticle::TYPE.compare(type) == 0){
-        bib = new BibtexArticle();
-        ((BibtexArticle*)bib)->setJournal(Util::parseField("journal", bibStr));
-        ((BibtexArticle*)bib)->setVolume(Util::parseIntField("volume", bibStr));
-        ((BibtexArticle*)bib)->setNumber(Util::parseIntField("number", bibStr));
-        ((BibtexArticle*)bib)->setPages(*PagesReader::parsePages(Util::parseField("pages", bibStr)));
-    } else {
-
-        if(BibtexBook::TYPE.compare(type) == 0){
-            bib = new BibtexBook();
-            ((BibtexBook*)bib)->setPublisher(Util::parseField("publisher", bibStr));
-        } else {
-
-            if(BibtexInproceedings::TYPE.compare(type) == 0){
-                bib = new BibtexInproceedings();
-                ((BibtexInproceedings*)bib)->setBooktitle(Util::parseField("booktitle", bibStr));
-                ((BibtexInproceedings*)bib)->setPages(*PagesReader::parsePages(bibStr));
-            }
-        }
-    }
-    bib->setAuthors(*AuthorReader::parseAuthors(bibStr));
-    bib->setTitle(Util::parseField("title", bibStr));
-    bib->setYear(Util::parseIntField("year", bibStr));
-    bib->setReference(ref);
-    return bib;
-}

@@ -9,19 +9,21 @@
 class BibFile
 {
 private:
-    list<BibtexFormat*> bibs;
-    enum SearchCriteria {
-        AUTHOR, YEAR, VEHICLE, TITLE
-    };
+    list<BibtexFormat *> bibs;
 
 public:
+    enum SearchCriteria {
+        ALL, AUTHOR, YEAR, VEHICLE, TITLE, REFERENCE
+    };
     BibFile();
     void createBibtex(BibtexFormat* bib);
     BibtexFormat* retrieveBibtex(SearchCriteria criteria, const string key);
     void updateBibtex(BibtexFormat* bib);
     void deleteBibtex(BibtexFormat* bib);
     string toText() const;
-    static BibtexFormat *parseTypeAndReference(const string bibStr);
+    list<BibtexFormat *> getBibs() const;
 };
+
+
 
 #endif // BIBFILE_H

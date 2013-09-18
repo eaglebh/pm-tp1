@@ -10,19 +10,28 @@
 #include "BibtexBook.h"
 #include "BibtexInproceedings.h"
 #include "bibfileio.h"
+#include "mainwindow.h"
+#include <QApplication>
 
 using namespace std;
 
 int main(int argc, char *argv[])
 {
-    QGuiApplication app(argc, argv);
 
     BibfileIO fileio("file.bib");
     cout << "fileio=\n" << fileio.getBibFile()->toText() << endl;
 
-    QtQuick2ApplicationViewer viewer;
-    viewer.setMainQmlFile(QStringLiteral("qml/tp1/main.qml"));
-    viewer.showExpanded();
 
+    QApplication app(argc, argv);
+    app.setOrganizationName("QtProject");
+    app.setApplicationName("Application Example");
+    MainWindow mainWin;
+    mainWin.show();
     return app.exec();
+
+    //    QGuiApplication app(argc, argv);
+    //    QtQuick2ApplicationViewer viewer;
+    //    viewer.setMainQmlFile(QStringLiteral("qml/tp1/main.qml"));
+    //    viewer.showExpanded();
+    //    return app.exec();
 }
