@@ -3,15 +3,15 @@
 #include "pagesreader.h"
 #include "util.h"
 
-PagesReader::PagesReader()
-{
-}
-
 Pages* PagesReader::parsePages(const string text)
 {
-    Pages *pages = new Pages();
-
     string values = Util::parseField("pages",text);
+    return parsePagesFromValue(values);
+}
+
+Pages *PagesReader::parsePagesFromValue(const string values)
+{
+    Pages *pages = new Pages();
     char str[1024];
     strcpy(str, values.c_str());
     char * pch;
@@ -41,3 +41,5 @@ Pages* PagesReader::parsePages(const string text)
 
     return pages;
 }
+
+

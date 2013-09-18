@@ -21,7 +21,7 @@ public:
     void updateBibtex(BibtexFormat* bib);
     void deleteBibtex(BibtexFormat* bib);
     string toText() const;
-    list<BibtexFormat *> getBibs() const;
+    list<BibtexFormat *> getBibs();
 };
 
 

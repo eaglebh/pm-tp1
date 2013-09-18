@@ -51,6 +51,7 @@ BibtexFormat *BibfileIO::parseTypeAndReference(const string bibStr)
 }
 
 BibfileIO::BibfileIO(const string fileName)
+    :fileName(fileName)
 {
     bibFile = new BibFile();
 
@@ -67,6 +68,7 @@ BibfileIO::BibfileIO(const string fileName)
             bibStr.str("");
         }
     }
+    ifs.close();
 }
 
 BibFile *BibfileIO::getBibFile()
@@ -76,5 +78,15 @@ BibFile *BibfileIO::getBibFile()
 
 void BibfileIO::persist()
 {
+    ofstream ofs(fileName);
 
+    list<BibtexFormat*>::const_iterator findIter = bibFile->getBibs().begin();
+    for(;findIter != bibFile->getBibs().end(); findIter++) {
+        BibtexFormat* bib = *findIter;
+        ofs << bib->getHeader();
+        ofs << bib->getRequiredFieldsText();
+        ofs << "}\n";
+    }
+
+    ofs.close();
 }

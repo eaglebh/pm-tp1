@@ -6,7 +6,7 @@
 #include "pagesreader.h"
 
 
-list<BibtexFormat *> BibFile::getBibs() const
+list<BibtexFormat *> BibFile::getBibs()
 {
     return bibs;
 }
@@ -37,10 +37,10 @@ BibtexFormat *BibFile::retrieveBibtex(BibFile::SearchCriteria criteria, const st
             actualText = ss.str();
             break;
         case VEHICLE:
-            if(bib->getType().compare(BibtexArticle::TYPE)) {
+            if(bib->getType().compare(BibtexArticle::TYPE) == 0) {
                  actualText = ((BibtexArticle*)bib)->getJournal();
             } else {
-                if(bib->getType().compare(BibtexInproceedings::TYPE)) {
+                if(bib->getType().compare(BibtexInproceedings::TYPE) == 0) {
                      actualText = ((BibtexInproceedings*)bib)->getBooktitle();
                 }
             }

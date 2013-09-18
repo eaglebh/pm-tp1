@@ -6,6 +6,7 @@
 class BibfileIO
 {
 private:
+    const string fileName;
     BibFile* bibFile;
     BibtexFormat* readBibtex(stringstream &bibStr);
     static BibtexFormat *parseTypeAndReference(const string bibStr);

@@ -3,11 +3,10 @@
 
 #include "authors.h"
 
-class AuthorReader
+namespace AuthorReader
 {
-public:
-    AuthorReader();
-    static Authors *parseAuthors(const string text);
-};
+    Authors *parseAuthors(const string text);
+    Authors * parseAuthorsFromValue(const string values);
+}
 
 #endif // AUTHORREADER_H

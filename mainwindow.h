@@ -18,10 +18,12 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void showAllBibtex(QStandardItem *rootNode);
-    void showOneBibtex(QStandardItem *rootNode);
+    void filterAllBibtex(QStandardItem *rootNode);
+    void filterOneBibtex(QStandardItem *rootNode);
 private slots:
     void selectionChangedSlot(const QItemSelection &, const QItemSelection &);
+    void saveButtonClicked();
+    void removeButtonClicked();
 public slots:
     void filterSelectionChanged(int index = 0);
     void searchButtonClicked();
@@ -29,6 +31,11 @@ private:
     Ui::MainWindow *ui;
     QStandardItemModel model;
     BibfileIO *fileio;
+    void hideAllInputs();
+    void showArticleInputs();
+    void showBookInputs();
+    void showInproceedingsInputs();
+    void showBasicInputs();
 };
 
 #endif // MAINWINDOW_H

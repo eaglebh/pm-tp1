@@ -2,15 +2,16 @@
 #include "authorreader.h"
 #include "util.h"
 
-AuthorReader::AuthorReader()
-{
-}
-
 Authors* AuthorReader::parseAuthors(const string text)
 {
-    Authors *authors = new Authors();
-
     string values = Util::parseField("author",text);
+
+    return parseAuthorsFromValue(values);
+}
+
+Authors * AuthorReader::parseAuthorsFromValue(const string values)
+{
+    Authors *authors = new Authors();
     istringstream iss(values);
 
     string word;
@@ -27,3 +28,4 @@ Authors* AuthorReader::parseAuthors(const string text)
 
     return authors;
 }
+

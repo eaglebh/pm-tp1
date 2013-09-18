@@ -3,11 +3,10 @@
 
 #include "pages.h"
 
-class PagesReader
+namespace PagesReader
 {
-public:
-    PagesReader();
-    static Pages *parsePages(const string text);
-};
+    Pages *parsePages(const string text);
+    Pages * parsePagesFromValue(string values);
+}
 
 #endif // PAGESREADER_H
