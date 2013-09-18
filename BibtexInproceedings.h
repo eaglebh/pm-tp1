@@ -1,22 +1,20 @@
 #ifndef BIBTEXINPROCEEDINGS_H
 #define BIBTEXINPROCEEDINGS_H
 
-#include "BibtexFormat.h"
+#include "BibTexHasPages.h"
 
-class BibtexInproceedings : public BibtexFormat
+class BibtexInproceedings : public BibtexHasPages
 {
 private:
     string booktitle;
-    unsigned int startPage;
-    unsigned int endPage;
+    Pages pages;
 public:
     BibtexInproceedings();
     string getBooktitle() const;
     void setBooktitle(const string &value);
-    unsigned int getStartPage() const;
-    void setStartPage(unsigned int value);
-    unsigned int getEndPage() const;
-    void setEndPage(unsigned int value);
+    Pages getPages() const;
+    void setPages(const Pages &value);
+    string getRequiredFieldsText() const;
 };
 
 #endif // BIBTEXINPROCEEDINGS_H

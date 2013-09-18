@@ -1,5 +1,24 @@
+#include <sstream>
 #include "BibtexFormat.h"
 
+Authors BibtexFormat::getAuthors() const
+{
+    return authors;
+}
+
+void BibtexFormat::setAuthors(const Authors &value)
+{
+    authors = value;
+}
+
+string BibtexFormat::getRequiredFieldsText() const
+{
+    stringstream text;
+    text << "author = {" << this->authors.getAuthorsText() << "},\n";
+    text << "title = {" << this->title << "},\n";
+    text << "year = {" << this->year << "},\n";
+    return text.str();
+}
 BibtexFormat::BibtexFormat()
 {
 }
@@ -14,11 +33,6 @@ void BibtexFormat::setReference(const string &value)
     reference = value;
 }
 
-string BibtexFormat::getAuthor() const
-{
-    return this->author;
-}
-
 string BibtexFormat::getTitle() const
 {
     return this->title;
@@ -27,11 +41,6 @@ string BibtexFormat::getTitle() const
 long BibtexFormat::getYear() const
 {
     return this->year;
-}
-
-void BibtexFormat::setAuthor(const string &author)
-{
-    this->author = author;
 }
 
 void BibtexFormat::setTitle(const string &title)

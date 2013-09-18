@@ -16,7 +16,14 @@ SOURCES += main.cpp \
     BibtexBook.cpp \
     BibtexFormat.cpp \
     BibtexArticle.cpp \
-    BibtexInproceedings.cpp
+    BibtexInproceedings.cpp \
+    pages.cpp \
+    authors.cpp \
+    BibTexHasPages.cpp \
+    util.cpp \
+    bibfile.cpp \
+    authorreader.cpp \
+    pagesreader.cpp
 
 # Installation path
 # target.path =
@@ -29,4 +36,11 @@ HEADERS += \
     BibtexBook.h \
     BibtexFormat.h \
     BibtexArticle.h \
-    BibtexInproceedings.h
+    BibtexInproceedings.h \
+    pages.h \
+    authors.h \
+    BibTexHasPages.h \
+    util.h \
+    bibfile.h \
+    authorreader.h \
+    pagesreader.h

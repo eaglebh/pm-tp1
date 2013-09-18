@@ -1,3 +1,4 @@
+#include <sstream>
 #include "BibtexArticle.h"
 
 
@@ -31,24 +32,14 @@ void BibtexArticle::setNumber(unsigned short value)
     number = value;
 }
 
-unsigned int BibtexArticle::getStartPage() const
+string BibtexArticle::getRequiredFieldsText() const
 {
-    return startPage;
-}
-
-void BibtexArticle::setStartPage(unsigned int value)
-{
-    startPage = value;
-}
-
-unsigned int BibtexArticle::getEndPage() const
-{
-    return endPage;
-}
-
-void BibtexArticle::setEndPage(unsigned int value)
-{
-    endPage = value;
+    stringstream text;
+    text << BibtexHasPages::getRequiredFieldsText();
+    text << "journal = {" << this->journal << "},\n";
+    text << "volume = {" << this->volume << "},\n";
+    text << "number = {" << this->number << "},\n";
+    return text.str();
 }
 BibtexArticle::BibtexArticle()
 {

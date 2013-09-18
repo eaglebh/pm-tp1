@@ -1,15 +1,14 @@
 #ifndef BIBTEXARTICLE_H
 #define BIBTEXARTICLE_H
-#include "BibtexFormat.h"
+#include "BibTexHasPages.h"
+#include <list>
 
-class BibtexArticle : public BibtexFormat
+class BibtexArticle : public BibtexHasPages
 {
 private:
     string journal;
     unsigned short volume;
     unsigned short number;
-    unsigned int startPage;
-    unsigned int endPage;
 public:
     BibtexArticle();
     string getJournal() const;
@@ -18,10 +17,7 @@ public:
     void setVolume(unsigned short value);
     unsigned short getNumber() const;
     void setNumber(unsigned short value);
-    unsigned int getStartPage() const;
-    void setStartPage(unsigned int value);
-    unsigned int getEndPage() const;
-    void setEndPage(unsigned int value);
+    string getRequiredFieldsText() const;
 };
 
 #endif // BIBTEXARTICLE_H

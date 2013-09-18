@@ -9,6 +9,7 @@ public:
     BibtexBook();
     string getPublisher() const;
     void setPublisher(const string &value);
+    string getRequiredFieldsText() const;
 };
 
 #endif // BIBTEXBOOK_H

@@ -1,3 +1,4 @@
+#include <sstream>
 #include "BibtexInproceedings.h"
 
 
@@ -11,24 +12,23 @@ void BibtexInproceedings::setBooktitle(const string &value)
     booktitle = value;
 }
 
-unsigned int BibtexInproceedings::getStartPage() const
+Pages BibtexInproceedings::getPages() const
 {
-    return startPage;
+    return pages;
 }
 
-void BibtexInproceedings::setStartPage(unsigned int value)
+void BibtexInproceedings::setPages(const Pages &value)
 {
-    startPage = value;
+    pages = value;
 }
 
-unsigned int BibtexInproceedings::getEndPage() const
+string BibtexInproceedings::getRequiredFieldsText() const
 {
-    return endPage;
-}
-
-void BibtexInproceedings::setEndPage(unsigned int value)
-{
-    endPage = value;
+    stringstream text;
+    text << BibtexFormat::getRequiredFieldsText();
+    text << "booktitle = {" << this->booktitle << "},\n";
+    text << "pages = {" << this->pages.getPagesText() << "},\n";
+    return text.str();
 }
 BibtexInproceedings::BibtexInproceedings()
 {
