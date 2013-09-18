@@ -17,18 +17,24 @@ Pages* PagesReader::parsePages(const string text)
     char * pch;
     pch = strtok (str,",-");
     int lastNumber = 0;
+    bool actualIsASequence = false;
     while (pch != NULL)
     {
         int pageNumber = 0;
         istringstream(pch) >> pageNumber;
-        if(values[pch-str+strlen(pch)] == '-') {
+
+        if(actualIsASequence) {
+            actualIsASequence = false;
             for(int i = lastNumber+1; i <=pageNumber; i++){
-                pages->addPage( pageNumber);
-                lastNumber = pageNumber;
+                pages->addPage( i);
+                lastNumber = i;
             }
         } else {
             pages->addPage( pageNumber);
             lastNumber = pageNumber;
+        }
+        if(values[pch-str+strlen(pch)] == '-') {
+            actualIsASequence = true;
         }
         pch = strtok (NULL, ",-");
     }

@@ -28,7 +28,7 @@ BibtexFormat *BibfileIO::parseTypeAndReference(const string bibStr)
         ((BibtexArticle*)bib)->setJournal(Util::parseField("journal", bibStr));
         ((BibtexArticle*)bib)->setVolume(Util::parseIntField("volume", bibStr));
         ((BibtexArticle*)bib)->setNumber(Util::parseIntField("number", bibStr));
-        ((BibtexArticle*)bib)->setPages(*PagesReader::parsePages(Util::parseField("pages", bibStr)));
+        ((BibtexArticle*)bib)->setPages(*PagesReader::parsePages(bibStr));
     } else {
 
         if(BibtexBook::TYPE.compare(type) == 0){

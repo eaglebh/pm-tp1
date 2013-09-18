@@ -69,9 +69,8 @@ void MainWindow::searchButtonClicked()
     case BibFile::SearchCriteria::ALL:
         showAllBibtex(rootNode);
         break;
-    case BibFile::SearchCriteria::AUTHOR:
-        showOneBibtex(rootNode);
     default:
+        showOneBibtex(rootNode);
         break;
     }
 }
