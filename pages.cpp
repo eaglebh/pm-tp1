@@ -1,14 +1,9 @@
 #include "pages.h"
 #include <iostream>
-#include <sstream>
 
-string Pages::getPagesText() const
+list<unsigned int> Pages::getPageNumbers() const
 {
-    stringstream pagesText;
-    for (list<unsigned int>::const_iterator it = pageNumbers.begin(); it != pageNumbers.end(); it++) {
-        pagesText << *it;
-    }
-    return pagesText.str();
+    return pageNumbers;
 }
 
 Pages::Pages()

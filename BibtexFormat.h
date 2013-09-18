@@ -23,6 +23,8 @@ public:
     void setYear(const long &year);
     Authors getAuthors() const;
     void setAuthors(const Authors &value);
+    virtual string getType() const = 0;
+    string getHeader() const;
     virtual string getRequiredFieldsText() const;
     friend bool operator== (BibtexFormat &lhs, BibtexFormat &rhs){
         return (lhs.reference.compare(rhs.reference) == 0);

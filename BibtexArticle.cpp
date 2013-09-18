@@ -1,6 +1,7 @@
 #include <sstream>
 #include "BibtexArticle.h"
 
+const string BibtexArticle::TYPE = "article";
 
 string BibtexArticle::getJournal() const
 {

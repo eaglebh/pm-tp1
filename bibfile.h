@@ -2,6 +2,9 @@
 #define BIBFILE_H
 
 #include "BibtexFormat.h"
+#include "BibtexArticle.h"
+#include "BibtexBook.h"
+#include "BibtexInproceedings.h"
 
 class BibFile
 {
@@ -17,7 +20,8 @@ public:
     BibtexFormat* retrieveBibtex(SearchCriteria criteria, const string key);
     void updateBibtex(BibtexFormat* bib);
     void deleteBibtex(BibtexFormat* bib);
-
+    string toText() const;
+    static BibtexFormat *parseTypeAndReference(const string bibStr);
 };
 
 #endif // BIBFILE_H

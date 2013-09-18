@@ -3,6 +3,7 @@
 
 #include <list>
 #include <string>
+#include <sstream>
 
 using namespace std;
 class Pages
@@ -13,7 +14,17 @@ public:
     Pages();
     void addPage(unsigned int page);
     void removePage(unsigned int page);
-    string getPagesText() const;
+
+    static string getPagesText(const Pages *pages)
+    {
+        stringstream pagesText;
+        list<unsigned int> pageNumbers = pages->getPageNumbers();
+        for (list<unsigned int>::const_iterator it = pageNumbers.begin(); it != pageNumbers.end(); it++) {
+            pagesText << *it;
+        }
+        return pagesText.str();
+    }
+    list<unsigned int> getPageNumbers() const;
 };
 
 #endif // PAGES_H

@@ -1,6 +1,8 @@
 #include <sstream>
 #include "BibtexBook.h"
 
+const string BibtexBook::TYPE = "book";
+
 BibtexBook::BibtexBook()
 {
 }

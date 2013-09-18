@@ -3,6 +3,8 @@ folder_01.source = qml/tp1
 folder_01.target = qml
 DEPLOYMENTFOLDERS = folder_01
 
+QMAKE_CXXFLAGS += -std=c++11
+
 # Additional import path used to resolve QML modules in Creator's code model
 QML_IMPORT_PATH =
 
@@ -23,7 +25,8 @@ SOURCES += main.cpp \
     util.cpp \
     bibfile.cpp \
     authorreader.cpp \
-    pagesreader.cpp
+    pagesreader.cpp \
+    bibfileio.cpp
 
 # Installation path
 # target.path =
@@ -43,4 +46,5 @@ HEADERS += \
     util.h \
     bibfile.h \
     authorreader.h \
-    pagesreader.h
+    pagesreader.h \
+    bibfileio.h

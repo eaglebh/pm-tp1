@@ -1,6 +1,8 @@
 #include <cstring>
+#include <fstream>
 #include <sstream>
 #include <iostream>
+#include <regex>
 #include "util.h"
 
 using namespace std;
@@ -69,6 +71,7 @@ void Util::test()
     sscanf(pages.c_str(), "%d[^-,]%n",&p3, &read);
     sscanf(pages.c_str(), "%d[^-,]%n",&p4, &read);
 
+
     cout << "read=" <<read << endl;
     cout << p1 << endl;
     cout << p2 << endl;
@@ -82,4 +85,50 @@ void Util::test()
     cout << p3 << endl;
     cout << p4 << endl;
 
+    string bibfile = "@INPROCEEDINGS {author:06, "
+            "title    = {Some publication title},"
+            "author   = {First Author and Second Author},"
+            "crossref = {conference:06},"
+            "pages    = {330—331},"
+            "}"
+            "@PROCEEDINGS {conference:06,"
+            "editor    = {First Editor and Second Editor},"
+            "title     = {Proceedings of the Xth Conference on XYZ},"
+            "booktitle = {Proceedings of the Xth Conference on XYZ},"
+            "year      = 2006,"
+            "month     = oct,"
+            "}";
+
+    char str[1024];
+    strcpy(str, bibfile.c_str());
+    char * pch;
+    pch = strtok (str,"@");
+    while (pch != NULL)
+    {
+        cout << "pch=[" << pch << "]" << endl;
+        pch = strtok (NULL, "@");
+    }
+
+
+    ifstream ifs("file.bib");
+    string bibStr;
+    while (getline(ifs, bibStr, '@')) {
+        if(bibStr.length() > 0)
+            cout << "bibStr=[" << bibStr << "]" <<endl;
+    }
+
+    char type[80], ref[80];
+    sscanf("Book{Torre2008,", "%[^{]{%[^,],", type, ref);
+    cout << "type=" << type << " ref=" << ref << endl;
+
+    std::cmatch m;
+
+    std::regex_match ( "author    = \"Joe Torre and Tom Verducci\",", m, std::regex("(author)(.*)") );
+
+    for (unsigned i=0; i<m.size(); ++i) {
+        std::cout << "match " << i << ": " << m[i];
+        std::cout << " (with a length of " << m[i].length() << ")\n";
+    }
+
+    cout << Util::parseField("author",bibStr) << endl;
 }

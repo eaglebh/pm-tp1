@@ -19,6 +19,6 @@ string BibtexHasPages::getRequiredFieldsText() const
 {
     stringstream text;
     text << BibtexFormat::getRequiredFieldsText();
-    text << "pages = {" << this->pages.getPagesText() << "},\n";
+    text << "pages = {" << Pages::getPagesText(&this->pages) << "},\n";
     return text.str();
 }

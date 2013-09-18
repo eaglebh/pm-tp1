@@ -11,6 +11,13 @@ void BibtexFormat::setAuthors(const Authors &value)
     authors = value;
 }
 
+string BibtexFormat::getHeader() const
+{
+    stringstream header;
+    header << '@' << getType() << "{" << reference << ",\n";
+    return header.str();
+}
+
 string BibtexFormat::getRequiredFieldsText() const
 {
     stringstream text;

@@ -10,13 +10,20 @@ private:
     unsigned short volume;
     unsigned short number;
 public:
-    BibtexArticle();
+    static const string TYPE;
+    BibtexArticle();    
     string getJournal() const;
     void setJournal(const string &value);
     unsigned short getVolume() const;
     void setVolume(unsigned short value);
     unsigned short getNumber() const;
     void setNumber(unsigned short value);
+
+    // BibtexFormat interface
+    virtual string getType() const
+    {
+        return TYPE;
+    }
     string getRequiredFieldsText() const;
 };
 
