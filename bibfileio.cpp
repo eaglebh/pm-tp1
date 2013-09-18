@@ -23,12 +23,13 @@ BibfileIO::BibfileIO(const string fileName)
     ifstream ifs(fileName.c_str());
     string line;
 
-    while (getline(ifs, line)) {
-        if(line.length() > 0)
+    while (getline(ifs, line, '@')) {
+        if(line.length() > 0) {
             bibStr << line;
-        BibtexFormat* bib = readBibtex(bibStr);
-        bibFile->createBibtex(bib);
-        bibStr.str("");
+            BibtexFormat* bib = readBibtex(bibStr);
+            bibFile->createBibtex(bib);
+            bibStr.str("");
+        }
     }
 }
 

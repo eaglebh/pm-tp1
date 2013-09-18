@@ -10,9 +10,9 @@ private:
     Pages pages;
 public:
     BibtexHasPages();
+    virtual string getRequiredFieldsText() const;
     Pages getPages() const;
     void setPages(const Pages &value);
-    virtual string getRequiredFieldsText() const;
 };
 
 #endif // HASPAGES_H

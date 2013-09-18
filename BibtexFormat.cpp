@@ -6,7 +6,7 @@ Authors BibtexFormat::getAuthors() const
     return authors;
 }
 
-void BibtexFormat::setAuthors(const Authors &value)
+void BibtexFormat::setAuthors(const Authors value)
 {
     authors = value;
 }
@@ -35,7 +35,7 @@ string BibtexFormat::getReference() const
     return reference;
 }
 
-void BibtexFormat::setReference(const string &value)
+void BibtexFormat::setReference(const string value)
 {
     reference = value;
 }
@@ -50,12 +50,12 @@ long BibtexFormat::getYear() const
     return this->year;
 }
 
-void BibtexFormat::setTitle(const string &title)
+void BibtexFormat::setTitle(const string title)
 {
     this->title = title;
 }
 
-void BibtexFormat::setYear(const long &year)
+void BibtexFormat::setYear(const long year)
 {
     this->year = year;
 }

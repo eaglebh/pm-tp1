@@ -15,10 +15,10 @@ public:
     void addPage(unsigned int page);
     void removePage(unsigned int page);
 
-    static string getPagesText(const Pages *pages)
+    static string getPagesText(const Pages &pages)
     {
         stringstream pagesText;
-        list<unsigned int> pageNumbers = pages->getPageNumbers();
+        list<unsigned int> pageNumbers = pages.getPageNumbers();
         for (list<unsigned int>::const_iterator it = pageNumbers.begin(); it != pageNumbers.end(); it++) {
             pagesText << *it;
         }

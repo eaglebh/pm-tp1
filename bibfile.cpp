@@ -1,6 +1,9 @@
 #include <algorithm>
 #include <sstream>
 #include "bibfile.h"
+#include "util.h"
+#include "authorreader.h"
+#include "pagesreader.h"
 
 BibFile::BibFile()
 {
@@ -67,7 +70,7 @@ string BibFile::toText() const
         BibtexFormat* bib = *findIter;
         ss << bib->getHeader();
         ss << bib->getRequiredFieldsText();
-        ss << "}";
+        ss << "}\n";
     }
 
     return ss.str();
@@ -79,31 +82,29 @@ BibtexFormat* BibFile::parseTypeAndReference(const string bibStr)
     sscanf(bibStr.c_str(), "%[^{]{%[^,],", type, ref);
     BibtexFormat* bib;
 
-//      std::regex e ("\\b(sub)([^ ]*)");   // matches words beginning by "sub"
-
-//      std::regex_iterator<std::string::iterator> rit ( s.begin(), s.end(), e );
-//      std::regex_iterator<std::string::iterator> rend;
-
-//      while (rit!=rend) {
-//        std::cout << rit->str() << std::endl;
-//        ++rit;
-//      }
-
     if(BibtexArticle::TYPE.compare(type) == 0){
         bib = new BibtexArticle();
-
+        ((BibtexArticle*)bib)->setJournal(Util::parseField("journal", bibStr));
+        ((BibtexArticle*)bib)->setVolume(Util::parseIntField("volume", bibStr));
+        ((BibtexArticle*)bib)->setNumber(Util::parseIntField("number", bibStr));
+        ((BibtexArticle*)bib)->setPages(*PagesReader::parsePages(Util::parseField("pages", bibStr)));
     } else {
 
         if(BibtexBook::TYPE.compare(type) == 0){
             bib = new BibtexBook();
+            ((BibtexBook*)bib)->setPublisher(Util::parseField("publisher", bibStr));
         } else {
 
             if(BibtexInproceedings::TYPE.compare(type) == 0){
                 bib = new BibtexInproceedings();
+                ((BibtexInproceedings*)bib)->setBooktitle(Util::parseField("booktitle", bibStr));
+                ((BibtexInproceedings*)bib)->setPages(*PagesReader::parsePages(bibStr));
             }
         }
     }
-
+    bib->setAuthors(*AuthorReader::parseAuthors(bibStr));
+    bib->setTitle(Util::parseField("title", bibStr));
+    bib->setYear(Util::parseIntField("year", bibStr));
     bib->setReference(ref);
     return bib;
 }

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <regex>
 #include "util.h"
+#include "bibfileio.h"
 
 using namespace std;
 
@@ -48,16 +49,29 @@ string Util::parseString(const string text)
 string Util::parseField(const string fieldName, const string text) {
     string fieldValue;
     stringstream format;
+    int pos = text.find(fieldName);
+    string line = text.substr(pos);
     char array[1024];
     memset(array, '\0', 1024*sizeof(char));
     format << fieldName << " = " << "{%1023[^}]},";
-    if(sscanf(text.c_str(), format.str().c_str(), array) <= 0) {
-        stringstream format;
+    // primeira busca com chaves
+    if(sscanf(line.c_str(), format.str().c_str(), array) <= 0) {
+        format.str("");
         format << fieldName << " = " << "\"%1023[^\"]\",";
-        sscanf(text.c_str(), format.str().c_str(), array);
+        // segunda busca com aspas
+        if(sscanf(line.c_str(), format.str().c_str(), array) <= 0) {
+            format.str("");
+            format << fieldName << " = " << "%1023[^,],";
+            // terceira busca sem separadores
+            sscanf(line.c_str(), format.str().c_str(), array);
+        }
     }
     fieldValue = string(array);
     return fieldValue;
+}
+
+int Util::parseIntField(const string fieldName, const string text) {
+    return parseInt(parseField(fieldName, text));
 }
 
 void Util::test()
@@ -123,7 +137,7 @@ void Util::test()
 
     std::cmatch m;
 
-    std::regex_match ( "author    = \"Joe Torre and Tom Verducci\",", m, std::regex("(author)(.*)") );
+    std::regex_match ( bibStr.c_str(), m, std::regex("(author)(.*)") );
 
     for (unsigned i=0; i<m.size(); ++i) {
         std::cout << "match " << i << ": " << m[i];
@@ -131,4 +145,7 @@ void Util::test()
     }
 
     cout << Util::parseField("author",bibStr) << endl;
+
+    BibfileIO fileio("file.bib");
+    cout << "fileio=\n" << fileio.getBibFile()->toText() << endl;
 }

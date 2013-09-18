@@ -16,13 +16,13 @@ private:
 public:
     BibtexFormat();
     string getReference() const;
-    void setReference(const string &value);
+    void setReference(const string value);
     string getTitle() const;
-    void setTitle(const string &title);
+    void setTitle(const string title);
     long getYear() const;
-    void setYear(const long &year);
+    void setYear(const long year);
     Authors getAuthors() const;
-    void setAuthors(const Authors &value);
+    void setAuthors(const Authors value);
     virtual string getType() const = 0;
     string getHeader() const;
     virtual string getRequiredFieldsText() const;

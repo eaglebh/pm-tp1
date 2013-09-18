@@ -2,6 +2,7 @@
 #include "BibTexHasPages.h"
 
 
+
 Pages BibtexHasPages::getPages() const
 {
     return pages;
@@ -19,6 +20,6 @@ string BibtexHasPages::getRequiredFieldsText() const
 {
     stringstream text;
     text << BibtexFormat::getRequiredFieldsText();
-    text << "pages = {" << Pages::getPagesText(&this->pages) << "},\n";
+    text << "pages = {" << Pages::getPagesText(this->getPages()) << "},\n";
     return text.str();
 }
