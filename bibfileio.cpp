@@ -84,9 +84,11 @@ void BibfileIO::persist()
     list<BibtexFormat*>::const_iterator findIter = bibs.begin();
     for(;findIter != bibs.end(); findIter++) {
         BibtexFormat* bib = *findIter;
-        ofs << bib->getHeader();
-        ofs << bib->getRequiredFieldsText();
-        ofs << "}\n";
+        if(bib->getReference().length() > 0) {
+            ofs << bib->getHeader();
+            ofs << bib->getRequiredFieldsText();
+            ofs << "}\n";
+        }
     }
 
     ofs.close();

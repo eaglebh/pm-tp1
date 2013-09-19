@@ -38,10 +38,10 @@ BibtexFormat *BibFile::retrieveBibtex(BibFile::SearchCriteria criteria, const st
             break;
         case VEHICLE:
             if(bib->getType().compare(BibtexArticle::TYPE) == 0) {
-                 actualText = ((BibtexArticle*)bib)->getJournal();
+                actualText = ((BibtexArticle*)bib)->getJournal();
             } else {
                 if(bib->getType().compare(BibtexInproceedings::TYPE) == 0) {
-                     actualText = ((BibtexInproceedings*)bib)->getBooktitle();
+                    actualText = ((BibtexInproceedings*)bib)->getBooktitle();
                 }
             }
             break;
@@ -54,8 +54,14 @@ BibtexFormat *BibFile::retrieveBibtex(BibFile::SearchCriteria criteria, const st
         default:
             break;
         }
-        if(actualText.find(key) != string::npos){
-            return bib;
+        if(key.size() == 0){
+            if(actualText.size() == 0){
+                return bib;
+            }
+        } else {
+            if(actualText.find(key) != string::npos){
+                return bib;
+            }
         }
     }
     throw "Bibtex nao encontrado";
@@ -90,7 +96,7 @@ string BibFile::toText() const
         ss << bib->getRequiredFieldsText();
         ss << "}\n";
     }
-
+    
     return ss.str();
 }
 

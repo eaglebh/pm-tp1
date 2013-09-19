@@ -20,10 +20,13 @@ public:
 
     void filterAllBibtex(QStandardItem *rootNode);
     void filterOneBibtex(QStandardItem *rootNode);
+    void saveBibtex(BibtexFormat *bib);
 private slots:
     void selectionChangedSlot(const QItemSelection &, const QItemSelection &);
     void saveButtonClicked();
     void removeButtonClicked();
+    void createButtonClicked();
+    void newButtonClicked();
 public slots:
     void filterSelectionChanged(int index = 0);
     void searchButtonClicked();
@@ -36,6 +39,7 @@ private:
     void showBookInputs();
     void showInproceedingsInputs();
     void showBasicInputs();
+    void clearAllInputs();
 };
 
 #endif // MAINWINDOW_H

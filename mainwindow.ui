@@ -265,16 +265,6 @@
         </widget>
        </item>
       </layout>
-      <zorder>layoutWidget</zorder>
-      <zorder>layoutWidget</zorder>
-      <zorder>layoutWidget_2</zorder>
-      <zorder>layoutWidget_3</zorder>
-      <zorder>layoutWidget_4</zorder>
-      <zorder>layoutWidget_5</zorder>
-      <zorder>layoutWidget_6</zorder>
-      <zorder>layoutWidget_7</zorder>
-      <zorder>layoutWidget_8</zorder>
-      <zorder>layoutWidget_9</zorder>
       <zorder>verticalSpacer</zorder>
       <zorder>pbSave</zorder>
       <zorder>pbRemove</zorder>
@@ -295,6 +285,7 @@
     <property name="title">
      <string>Arquivo</string>
     </property>
+    <addaction name="action_Novo"/>
     <addaction name="action_Sair"/>
    </widget>
    <addaction name="menuArquivo"/>
@@ -305,7 +296,29 @@
     <string>&amp;Sair</string>
    </property>
   </action>
+  <action name="action_Novo">
+   <property name="text">
+    <string>&amp;Novo</string>
+   </property>
+  </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>action_Sair</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>274</x>
+     <y>265</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
