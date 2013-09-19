@@ -80,8 +80,9 @@ void BibfileIO::persist()
 {
     ofstream ofs(fileName);
 
-    list<BibtexFormat*>::const_iterator findIter = bibFile->getBibs().begin();
-    for(;findIter != bibFile->getBibs().end(); findIter++) {
+    list<BibtexFormat*> bibs = bibFile->getBibs();
+    list<BibtexFormat*>::const_iterator findIter = bibs.begin();
+    for(;findIter != bibs.end(); findIter++) {
         BibtexFormat* bib = *findIter;
         ofs << bib->getHeader();
         ofs << bib->getRequiredFieldsText();

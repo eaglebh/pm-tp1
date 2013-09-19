@@ -164,8 +164,7 @@ void MainWindow::searchButtonClicked()
 }
 
 void MainWindow::saveButtonClicked()
-{
-    fileio->persist();
+{    
     try {
         BibtexFormat *bib = fileio->getBibFile()->retrieveBibtex(BibFile::SearchCriteria::REFERENCE, ui->leReference->text().toUtf8().constData());
         if(bib) {
@@ -190,6 +189,8 @@ void MainWindow::saveButtonClicked()
         bib->setTitle(ui->leTitle->text().toUtf8().constData());
         bib->setYear(ui->leYear->text().toInt());
         bib->setReference(ui->leReference->text().toUtf8().constData());
+        fileio->persist();
+        qDebug() << "salvou: ";
     } catch(char const* msg) {
         qDebug() << "ERRO: " << msg;
         QMessageBox::information(NULL, "PMCC-TP1", "Não encontrou BibTex modificado para salvar");
@@ -205,11 +206,12 @@ void MainWindow::removeButtonClicked()
         }
 
         fileio->getBibFile()->deleteBibtex(bib);
+        fileio->persist();
     } catch(char const* msg) {
         qDebug() << "ERRO: " << msg;
         QMessageBox::information(NULL, "PMCC-TP1", "Não encontrou BibTex modificado para remover");
     }
-    qDebug() << fileio->getBibFile()->toText().c_str();
+
 }
 
 MainWindow::~MainWindow()
